@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="uiController"
+            type="com.kazanneft.assetsmanager.activities.AssetDetailsActivtiy" />
+        <variable
+            name="model"
+            type="com.kazanneft.assetsmanager.viewmodels.AssetDetailsViewModel" />
+        <variable
+            name="asset"
+            type="com.kazanneft.assetsmanager.models.Asset"/>
+    </data>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_activity_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title="Asset"
+                app:navigationIcon="@drawable/arrow_back_black_24dp"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".activities.AssetDetailsActivtiy">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_asset_name"
+                style="@style/AssetsManager.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/hint_asset_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={asset.assetName}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="layout_asset_name"
+                tools:layout_editor_absoluteY="63dp" />
+
+            <Spinner
+                android:id="@+id/spinner_asset_edit_departments"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:items="@{model.departments}"
+                app:selectedItem="@={asset.departmentLocation.department}"
+                app:selectionChanged="@{()->uiController.departmentChanged()}"
+                app:layout_constraintBottom_toTopOf="@+id/textView7"
+                app:layout_constraintEnd_toStartOf="@+id/spinner_asset_edit_assetGroups"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <Spinner
+                android:id="@+id/spinner_asset_edit_assetGroups"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:items="@{model.assetGroups}"
+                app:selectedItem="@={asset.assetGroup}"
+                app:selectionChanged="@{()->uiController.updateAssetSN()}"
+                app:layout_constraintBottom_toTopOf="@+id/textView8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/spinner_asset_edit_departments"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/header_department"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_asset_edit_departments"
+                app:layout_constraintStart_toStartOf="@+id/spinner_asset_edit_departments"
+                app:layout_constraintTop_toBottomOf="@+id/layout_asset_name" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/header_asset_group"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_asset_edit_assetGroups"
+                app:layout_constraintStart_toStartOf="@+id/spinner_asset_edit_assetGroups"
+                app:layout_constraintTop_toBottomOf="@+id/layout_asset_name"
+                app:layout_constraintVertical_bias="0.55" />
+
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/header_accountable_party"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_asset_details_employees"
+                app:layout_constraintStart_toStartOf="@+id/spinner_asset_details_employees"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_asset_edit_assetGroups" />
+
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/header_location"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_asset_details_locations"
+                app:layout_constraintStart_toStartOf="@+id/spinner_asset_details_locations"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_asset_edit_departments" />
+
+            <Spinner
+                android:id="@+id/spinner_asset_details_locations"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                items="@{uiController.locations}"
+                selectedItem="@={asset.departmentLocation.location}"
+                app:layout_constraintEnd_toStartOf="@+id/spinner_asset_details_employees"
+                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <Spinner
+                android:id="@+id/spinner_asset_details_employees"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:items="@{model.employees}"
+                app:selectedItem="@={asset.employee}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/spinner_asset_details_locations"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                style="@style/AssetsManager.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/hint_asset_description"
+                app:layout_constraintBottom_toTopOf="@+id/layout_warranty"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_asset_details_locations">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={asset.description}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_warranty"
+                style="@style/AssetsManager.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:hint="@string/hint_expired_waranty"
+                app:layout_constraintBottom_toTopOf="@+id/textView12"
+                app:layout_constraintEnd_toStartOf="@+id/textView10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                app:layout_constraintVertical_bias="0.13999999">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_warranty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/textView10"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/header_assetsn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/layout_warranty"
+                app:layout_constraintTop_toTopOf="@+id/layout_warranty" />
+
+            <TextView
+                android:id="@+id/tv_asset_sn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_warranty"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <Button
+                android:id="@+id/btn_browse"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textColor="@color/secondaryColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/btn_browse"
+                app:chainUseRtl="false"
+                app:layout_constraintBottom_toTopOf="@+id/rv_images"
+                app:layout_constraintEnd_toStartOf="@+id/btn_capture_image"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_warranty" />
+
+            <Button
+                android:id="@+id/btn_capture_image"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textColor="@color/secondaryColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/btn_capture_image"
+                app:layout_constraintBottom_toTopOf="@+id/rv_images"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_browse"
+                app:layout_constraintTop_toTopOf="@+id/btn_browse" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_images"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_browse" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_cancel"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/btn_submit"
+                app:layout_constraintTop_toBottomOf="@+id/rv_images" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit"
+                android:backgroundTint="@color/secondaryColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_submit"
+                app:layout_constraintLeft_toRightOf="@id/btn_cancel"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_images" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/header_images"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btn_browse"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/bottom_buttons_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="btn_cancel,btn_submit"
+                tools:layout_editor_absoluteY="731dp" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_rv_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="rv_images"
+                tools:layout_editor_absoluteY="731dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
+
+</layout>

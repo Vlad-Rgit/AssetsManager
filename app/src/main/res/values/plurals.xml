@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="assets">
+        <item quantity="one">%d asset</item>
+        <item quantity="few">%d assets</item>
+        <item quantity="many">%d assets</item>
+    </plurals>
+</resources>

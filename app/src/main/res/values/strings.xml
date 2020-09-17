@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">AssetsManager</string>
+    <string name="assets_header">Assets</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_close">Close</string>
+    <string name="menu_asset_search">Search</string>
+    <string name="search_asset_hint">AssetSN or Asset name</string>
+    <string name="hint_start_date">Start Date</string>
+    <string name="hint_end_date">End Date</string>
+    <string name="header_department">Department</string>
+    <string name="header_asset_group">Asset Group</string>
+    <string name="header_warranty">Warranty range</string>
+    <string name="hint_asset_name">Asset name</string>
+    <string name="header_location">Location</string>
+    <string name="header_accountable_party">Accountable party</string>
+    <string name="hint_asset_description">Asset description</string>
+    <string name="hint_expired_waranty">Expired waranty</string>
+    <string name="header_assetsn">AssetSN</string>
+    <string name="btn_browse">Browse</string>
+    <string name="btn_capture_image">Capture image</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_submit">Submit</string>
+    <string name="header_images">Images</string>
+    <string name="selected_asset">Selected Asset</string>
+    <string name="destination_department">Destination Department</string>
+    <string name="assetsn">AssetSN</string>
+    <string name="destination_location">Destination Location</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+</resources>

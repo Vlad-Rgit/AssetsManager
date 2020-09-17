@@ -1,0 +1,31 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+    </style>
+
+
+    <style name="Divider" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+
+    <style name="AssetsManager.Theme.TextInputLayout"
+        parent="Widget.Design.TextInputLayout">
+        <item name="colorControlActivated">@color/secondaryColor</item>
+    </style>
+
+    <style name="AssetsManager.TextInputLayout"
+        parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="theme">@style/AssetsManager.Theme.TextInputLayout</item>
+        <item name="boxStrokeColor">@color/secondaryColor</item>
+        <item name="hintTextColor">@color/primaryDarkColor</item>
+        <item name="boxBackgroundColor">#fff</item>
+        <item name="android:headerBackground">#fff</item>
+    </style>
+
+</resources>
